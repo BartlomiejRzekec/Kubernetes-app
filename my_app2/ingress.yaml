@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: voting-app-ingress
+  namespace: qatestlab
+  labels:
+    name: voting-app-ingress
+    app: demo-voting-app
+spec:
+  rules:
+    - host: qatestlab.lab-1.mux.domeus.com
+      http:
+        paths:
+          - path: "/vote"
+            pathType: Prefix
+            backend:
+              service:
+                name: voting-service
+                port:
+                  number: 80
+          - path: "/result"
+            pathType: prefix
+            backend:
+              service:
+                name: result-service
+                port:
+                  number: 80
+
+

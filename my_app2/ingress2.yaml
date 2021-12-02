@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: voting-app-ingress
+  namespace: qatestlab
+  labels:
+    name: voting-app-ingress
+    app: demo-voting-app
+spec:
+  rules:
+    - host: qatestlab.lab-1.mux.domeus.com
+      http:
+        paths:
+          - backend:
+              serviceName: voting-service
+              servicePort: 80
+            path: /vote
+          - backend:
+              serviceName: result-service
+              servicePort: 80
+            path: /result
